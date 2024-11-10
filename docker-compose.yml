@@ -1,13 +1,29 @@
 version: '3.8'
 
 services:
-  # API CONFIG
+  # API Settings
   meli-api:
     build: .
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
     command: npm run dev
     ports:
       - "3000:3000"
     env_file:
       - ./.env
+    depends_on:
+      - mongo-db
+    environment:
+      MONGO_URL: "mongodb://mongo-db:27017/meli_database"
+
+  # MongoDB Settings
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

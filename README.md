@@ -1,7 +1,7 @@
 # com.meli.api
 Challenge for Mercado Libre 2024 (mutants)
 
-## Run Locally
+## Run Locally with Docker (Recommended)
 
 Clone the project
 
@@ -24,7 +24,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  docker-compose up --build
 ```
 
 ## Running Tests
