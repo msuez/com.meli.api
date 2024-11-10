@@ -1,0 +1,15 @@
+
+export class CustomError extends Error {
+    constructor(
+        public readonly message: string,
+        public readonly statusCode: number = 400,
+    ) {
+        super(message);
+    }
+}
+
+export class ForbiddenError extends CustomError {
+    constructor(message: string) {
+        super(message, 403);
+    }
+}
