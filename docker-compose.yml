@@ -6,7 +6,6 @@ services:
     build: .
     volumes:
       - ./:/usr/src/app
-      - /usr/src/app/node_modules
     command: npm run dev
     ports:
       - "3000:3000"
@@ -14,14 +13,13 @@ services:
       - ./.env
     depends_on:
       - mongo-db
-    environment:
-      MONGO_URL: "mongodb://mongo-db:27017/meli_database"
 
   # MongoDB Settings
   mongo-db:
     image: mongo:latest
     ports:
       - "27017:27017"
+    command: ["mongod", "--quiet"]
     volumes:
       - mongo-data:/data/db
 

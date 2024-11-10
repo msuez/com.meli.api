@@ -20,6 +20,9 @@ export class MutantsRoutes {
          *   post:
          *     summary: Detect Mutant DNA
          *     description: Detects if a DNA sequence belongs to a mutant
+         *     operationId: registerDna
+         *     tags: 
+         *       - Mutants
          *     requestBody:
          *       required: true
          *       content:

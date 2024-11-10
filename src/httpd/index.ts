@@ -2,8 +2,8 @@ import cors from 'cors';
 import express, { Router, } from 'express';
 import { Server as HttpServer } from 'http';
 
-
 import { Swagger } from '../config/swagger';
+import { connectDB } from '../config/database';
 import { errorHandler } from '../middlewares/errorHandler';
 
 interface Options {
@@ -15,7 +15,6 @@ interface Options {
 
 export class Server {
 
-    
     private readonly env:string;
     private readonly port: number;
     private readonly routes: Router;
@@ -56,16 +55,18 @@ export class Server {
         this.app.use(errorHandler);
     }
 
-    public startServerless() {
+    public async startServerless() {
+        await connectDB();
         this.create();
         return this.app;
     }
 
-    public start() {
+    public async start() {
+        await connectDB();
+        this.create();
         this.serverListener = this.app.listen(this.port, () => {
             console.log(`Server running on port: ${this.port}`);
         });
-        this.create();
     }
 
     public close() {

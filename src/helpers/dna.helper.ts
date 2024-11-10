@@ -1,4 +1,3 @@
-
 interface CheckSequenceParams {
     dna: string[];
     x: number;
@@ -8,7 +7,7 @@ interface CheckSequenceParams {
     sequenceLength: number;
 }
 
-export const checkSequence = ({
+const checkSequence = ({
     dna,
     x,
     y,
@@ -16,8 +15,8 @@ export const checkSequence = ({
     dy,
     sequenceLength
 }: CheckSequenceParams): boolean => {
-    const base = dna[x][y];
     const n = dna.length;
+    const base = dna[x][y];
 
     for (let i = 1; i < sequenceLength; i++) {
         const newX = x + i * dx;
@@ -46,7 +45,9 @@ export const isMutant = (dna: string[]): boolean => {
                 checkSequence({ dna, x: i, y: j, dx: 1, dy: -1, sequenceLength })
             ) {
                 mutantSequences++;
-                if (mutantSequences > 1) return true;
+                if (mutantSequences > 1) {
+                    return true;
+                }
             }
         }
     }
