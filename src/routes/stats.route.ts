@@ -5,26 +5,24 @@ import {
     Response,
 } from 'express';
 
-import { MutantsRoutes } from './mutants.route';
-import { StatsRoutes } from './stats.route';
-export class AppRoutes {
+import { StatsController } from '../controllers/stats.controller';
+
+export class StatsRoutes {
 
     static get routes():Router {
 
         const router = Router();
-
-        router.use('/mutant', MutantsRoutes.routes);
-        router.use('/stats', StatsRoutes.routes);
+        const statsController = new StatsController();
 
         /**
          * @swagger
-         * /ping:
+         * /stats:
          *   get:
-         *     summary: Ping status
-         *     description: Returns a Pong response to check the status of the API.
-         *     operationId: pingStatus
+         *     summary: Mutant DNA Ratio Stats
+         *     description: Get the ratio of mutant DNA sequences to human DNA sequences.
+         *     operationId: getStats
          *     tags: 
-         *       - Status
+         *       - Stats
          *     responses:
          *       200:
          *         description: Successful response
@@ -40,12 +38,7 @@ export class AppRoutes {
          *                   type: string
          *                   example: Success
          */
-        router.get('/ping', (req:Request, res:Response) => {
-            res.status(200).json({
-                message: `Pong`,
-                status: `Success`,
-            });
-        });
+        router.get('/', statsController.getDnaRatio);
 
         return router;
     }

@@ -27,7 +27,7 @@ Start the server
   docker-compose up --build
 ```
 
-## Running Tests
+## Running Tests (>80)
 
 To run tests, run the following command
 

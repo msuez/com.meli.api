@@ -49,7 +49,7 @@ export class Server {
 
         //* Catch all
         this.app.use('*', (req, res) => {
-            res.status(404).send(`Access denied.`);
+            res.status(404).send(`Not found.`);
         });
 
         //* Error handler
