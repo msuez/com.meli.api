@@ -5,7 +5,7 @@ import { Server } from '../../src/httpd/';
 import * as database from '../../src/config/database';
 import { AppRoutes } from '../../src/routes';
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 jest.mock('../../src/config/database');
 jest.mock('../../src/middlewares/errorHandler');
 

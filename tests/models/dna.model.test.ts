@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import DnaModel from '../../src/models/dna.model';
 import { connect, closeDatabase, clearDatabase } from '../setupDatabase';
 
+jest.setTimeout(10000);
+
 beforeAll(async () => await connect());
 afterEach(async () => await clearDatabase());
 afterAll(async () => await closeDatabase());

@@ -11,10 +11,10 @@
     "rootDir": "./src",
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "tests"
+    "node_modules"
   ]
 }
