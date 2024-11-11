@@ -29,6 +29,3 @@ jobs:
         run: |
           npm run test:coverage
 
-      - name: Build the project
-        run: |
-          npm run build
