@@ -5,7 +5,15 @@ import {
     NextFunction,
 } from 'express';
 
+import { StatsService } from '../services/stats.service';
+
 export class StatsController {
+
+    private statsService: StatsService;
+
+    constructor(statsService: StatsService) {
+        this.statsService = statsService;
+    }
 
     public getDnaRatio: Handler = async(
         req: Request,
@@ -14,10 +22,9 @@ export class StatsController {
     ): Promise<void> => {
         try {
 
-            res.status(200).json({
-                message: `Pong`,
-                status: `Success`,
-            });
+            const stats = await this.statsService.getDnaStats();
+
+            res.status(200).json(stats);
 
         } catch (error) {
             next(error);

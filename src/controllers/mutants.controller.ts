@@ -8,8 +8,15 @@ import {
 import { ForbiddenError } from '../errors';
 import dnaModel from '../models/dna.model';
 import { isMutant, } from '../helpers/dna.helper';
+import { MutantService } from '../services/mutant.service';
 
 export class MutantsController {
+
+    private mutantService: MutantService;
+
+    constructor(mutantService: MutantService) {
+        this.mutantService = mutantService;
+    }
 
     public registerDna: Handler = async(
         req: Request,
@@ -21,10 +28,7 @@ export class MutantsController {
             const { dna } = req.body;
             const mutant:boolean = isMutant(dna);
 
-            await dnaModel.create({
-                dna,
-                isMutant: mutant,
-            });
+            await this.mutantService.saveDna(dna, mutant);
 
             if(!mutant) {
                 throw new ForbiddenError('Is a human');

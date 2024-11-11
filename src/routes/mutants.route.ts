@@ -4,6 +4,7 @@ import {
 } from 'express';
 import { check } from 'express-validator';
 
+import { MutantService } from '../services/mutant.service';
 import { MutantsController } from '../controllers/mutants.controller';
 import { validateFields } from '../middlewares/validate-fields';
 
@@ -12,7 +13,8 @@ export class MutantsRoutes {
     static get routes():Router {
 
         const router = Router();
-        const mutantsController = new MutantsController();
+        const mutantService = new MutantService(); 
+        const mutantsController = new MutantsController( mutantService );
 
         /**
          * @swagger
@@ -28,19 +30,36 @@ export class MutantsRoutes {
          *       content:
          *         application/json:
          *           schema:
-         *             type: object
-         *             properties:
-         *               dna:
-         *                 type: array
-         *                 items:
-         *                   type: string
+         *             $ref: '#/components/schemas/RegisterDnaBody'
          *     responses:
          *       200:
          *         description: Mutant detected
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/RegisterDnaResponse'
          *       403:
-         *         description: Human detected
+         *         description: Human detected (Forbidden)
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         *             examples:
+         *               Forbidden:
+         *                 value:
+         *                   statusCode: 403
+         *                   message: "Is a human"
          *       400:
-         *         description: Invalid DNA format
+         *         description: Invalid DNA format (Bad Request)
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         *             examples:
+         *               BadRequest:
+         *                 value:
+         *                   statusCode: 400
+         *                   message: "Invalid DNA format"
          */
         router.post('/', [
 

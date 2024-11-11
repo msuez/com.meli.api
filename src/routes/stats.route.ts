@@ -1,10 +1,9 @@
 
 import {
     Router,
-    Request,
-    Response,
 } from 'express';
 
+import { StatsService } from '../services/stats.service';
 import { StatsController } from '../controllers/stats.controller';
 
 export class StatsRoutes {
@@ -12,7 +11,8 @@ export class StatsRoutes {
     static get routes():Router {
 
         const router = Router();
-        const statsController = new StatsController();
+        const statsService = new StatsService();
+        const statsController = new StatsController(statsService);
 
         /**
          * @swagger
@@ -29,14 +29,7 @@ export class StatsRoutes {
          *         content:
          *           application/json:
          *             schema:
-         *               type: object
-         *               properties:
-         *                 message:
-         *                   type: string
-         *                   example: Pong
-         *                 status:
-         *                   type: string
-         *                   example: Success
+         *               $ref: '#/components/schemas/StatsResponse'
          */
         router.get('/', statsController.getDnaRatio);
 

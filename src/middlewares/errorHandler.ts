@@ -8,15 +8,19 @@ export const errorHandler = (
     res: Response,
     next: NextFunction
 ) => {
-    if (err instanceof CustomError) {
-        res.status(err.statusCode).json({
-            statusCode: err.statusCode,
-            message: err.message,
-        });
+    if (err) {
+        if (err instanceof CustomError) {
+            res.status(err.statusCode).json({
+                statusCode: err.statusCode,
+                message: err.message,
+            });
+        } else {
+            res.status(500).json({
+                statusCode: 500,
+                message: 'Internal Server Error',
+            });
+        }
     } else {
-        res.status(500).json({
-            statusCode: 500,
-            message: 'Internal Server Error',
-        });
+        next();
     }
 };

@@ -7,7 +7,7 @@ interface CheckSequenceParams {
     sequenceLength: number;
 }
 
-const checkSequence = ({
+export const checkSequence = ({
     dna,
     x,
     y,

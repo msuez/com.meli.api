@@ -8,11 +8,11 @@ interface IDna extends Document {
 const DnaSchema: Schema = new Schema({
     dna: {
         type: [String],
-        required: true,
+        required: [true, 'DNA is required'],
     },
     isMutant: {
         type: Boolean,
-        required: true,
+        required: [true, 'isMutant flag is required'],
     },
 }, {
     timestamps: true,
