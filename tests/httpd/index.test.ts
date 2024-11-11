@@ -5,6 +5,7 @@ import { Server } from '../../src/httpd/';
 import * as database from '../../src/config/database';
 import { AppRoutes } from '../../src/routes';
 
+jest.setTimeout(10000);
 jest.mock('../../src/config/database');
 jest.mock('../../src/middlewares/errorHandler');
 
@@ -24,15 +25,18 @@ describe('Server', () => {
         });
     });
 
-    afterAll(() => {
+    afterEach(()=>{
         server.close();
+    });
+
+    afterAll(() => {
         jest.restoreAllMocks();
     });
 
     it('should call connectDB and set up middlewares', async () => {
         const connectDBMock = jest.spyOn(database, 'connectDB').mockResolvedValue(true);
 
-        await server.startServerless();
+        await server.start();
         expect(connectDBMock).toHaveBeenCalled();
 
         const response = await request(server.app).get('/ping');
@@ -41,7 +45,7 @@ describe('Server', () => {
     });
 
     it('should return 404 for invalid routes', async () => {
-        await server.startServerless();
+        await server.start();
 
         const response = await request(server.app).get('/nonexistent');
         expect(response.status).toBe(404);

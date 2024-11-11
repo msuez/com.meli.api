@@ -55,8 +55,8 @@ export class Server {
         this.app.use(errorHandler);
     }
 
-    public async startServerless() {
-        await connectDB();
+    public startServerless() {
+        connectDB();
         this.create();
         return this.app;
     }
