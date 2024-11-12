@@ -41,7 +41,7 @@ export class Server {
             extended: true,
         }));
 
-        // this.app.use(morgan('dev'));
+        this.app.use(morgan('dev'));
 
         //* Swagger documentation
         this.app.use('/docs', Swagger.serve, Swagger.setup(this.port));
@@ -51,7 +51,7 @@ export class Server {
 
         //* Catch all
         this.app.use('*', (req, res) => {
-            res.status(404).send(`Not found.`);
+            res.status(405).send(`Method Not Allowed`);
         });
 
         //* Error handler
