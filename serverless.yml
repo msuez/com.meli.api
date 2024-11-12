@@ -1,0 +1,34 @@
+service: com-meli-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+
+functions:
+  meliChallenge:
+    handler: dist/app.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+
+build:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    target: 'node20'
+    platform: 'node'
+    external:
+      - cors
+      - express
+      - swagger-ui-express
+
+package:
+  individually: true
+  excludeDevDependencies: true

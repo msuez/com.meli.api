@@ -1,19 +1,14 @@
-import path from 'path';
-import YAML from 'yamljs';
+import * as path from 'path';
 import { RequestHandler } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+import swaggerUi, { SwaggerOptions } from 'swagger-ui-express';
 
-const definitions = YAML.load(path.join(__dirname, '../routes/definitions.yml'));
-
-const combinedSchemas = {
-    ...definitions.components.schemas,
-};
+import { envs } from './envs';
 
 export class Swagger {
 
     static setup(port:number): RequestHandler {
-        const swaggerOptions = {
+        const swaggerOptions : SwaggerOptions = {
             swaggerDefinition: {
                 openapi: '3.0.0',
                 info: {
@@ -26,11 +21,10 @@ export class Swagger {
                         email: 'matisuez@gmail.com',
                     },
                 },
-                components: {
-                    schemas: combinedSchemas,
-                },
             },
-            apis: ['**/*.ts'],
+            apis: [
+                'src/routes/*.ts',
+            ],
         };
         return swaggerUi.setup(swaggerJSDoc(swaggerOptions));
     }

@@ -1,4 +1,5 @@
 import cors from 'cors';
+import morgan from 'morgan';
 import express, { Router, } from 'express';
 import { Server as HttpServer } from 'http';
 
@@ -40,6 +41,8 @@ export class Server {
             extended: true,
         }));
 
+        // this.app.use(morgan('dev'));
+
         //* Swagger documentation
         this.app.use('/docs', Swagger.serve, Swagger.setup(this.port));
 
@@ -55,8 +58,8 @@ export class Server {
         this.app.use(errorHandler);
     }
 
-    public startServerless() {
-        connectDB();
+    public async startServerless() {
+        await connectDB();
         this.create();
         return this.app;
     }

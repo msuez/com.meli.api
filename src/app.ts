@@ -5,14 +5,25 @@ import { Server } from './httpd/';
 import { envs } from './config/envs';
 import { AppRoutes } from './routes';
 
+type Serverless = ReturnType<typeof awsServerlessExpress.createServer>;
+
 export const app = new Server({
     env: envs.NODE_ENV,
     port: envs.PORT || 3000,
     routes: AppRoutes.routes,
 });
 
-const server = awsServerlessExpress.createServer(app.startServerless());
+let server: Serverless;
 
-export const handler = (event: APIGatewayProxyEvent, context: Context) => {
-    awsServerlessExpress.proxy(server, event, context);
+const initializeServer = async () => {
+    if (!server) {
+        const expressApp = await app.startServerless();
+        server = awsServerlessExpress.createServer(expressApp);
+    }
+};
+
+export const handler = async (event: APIGatewayProxyEvent, context: Context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+    await initializeServer();
+    return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
 };

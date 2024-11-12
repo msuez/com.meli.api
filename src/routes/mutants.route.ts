@@ -21,45 +21,75 @@ export class MutantsRoutes {
          * /mutant:
          *   post:
          *     summary: Detect Mutant DNA
-         *     description: Detects if a DNA sequence belongs to a mutant
+         *     description: Detects if a DNA sequence belongs to a mutant.
          *     operationId: registerDna
-         *     tags: 
+         *     tags:
          *       - Mutants
          *     requestBody:
          *       required: true
          *       content:
          *         application/json:
          *           schema:
-         *             $ref: '#/components/schemas/RegisterDnaBody'
+         *             type: object
+         *             properties:
+         *               dna:
+         *                 type: array
+         *                 items:
+         *                   type: string
+         *                 description: The DNA sequence to register
+         *                 example: ["ATCGGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
+         *             required:
+         *               - dna
          *     responses:
          *       200:
          *         description: Mutant detected
          *         content:
          *           application/json:
          *             schema:
-         *               $ref: '#/components/schemas/RegisterDnaResponse'
+         *               type: object
+         *               properties:
+         *                 message:
+         *                   type: string
+         *                   description: Indicates if the DNA sequence is from a mutant
+         *                   example: "Is a mutant"
+         *               required:
+         *                 - message
          *       403:
          *         description: Human detected (Forbidden)
          *         content:
          *           application/json:
          *             schema:
-         *               $ref: '#/components/schemas/ErrorResponse'
-         *             examples:
-         *               Forbidden:
-         *                 value:
-         *                   statusCode: 403
-         *                   message: "Is a human"
+         *               type: object
+         *               properties:
+         *                 statusCode:
+         *                   type: integer
+         *                   description: HTTP status code of the error
+         *                   example: 403
+         *                 message:
+         *                   type: string
+         *                   description: Description of the error
+         *                   example: "Is a human"
+         *               required:
+         *                 - statusCode
+         *                 - message
          *       400:
          *         description: Invalid DNA format (Bad Request)
          *         content:
          *           application/json:
          *             schema:
-         *               $ref: '#/components/schemas/ErrorResponse'
-         *             examples:
-         *               BadRequest:
-         *                 value:
-         *                   statusCode: 400
-         *                   message: "Invalid DNA format"
+         *               type: object
+         *               properties:
+         *                 statusCode:
+         *                   type: integer
+         *                   description: HTTP status code of the error
+         *                   example: 400
+         *                 message:
+         *                   type: string
+         *                   description: Description of the error
+         *                   example: "Invalid DNA format"
+         *               required:
+         *                 - statusCode
+         *                 - message
          */
         router.post('/', [
 

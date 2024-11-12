@@ -39,6 +39,23 @@ or
   npm run test:watch
 ```
 
+## Curls to AWS Lambda
+
+#### POST to /mutant
+```bash
+curl -X POST 'https://3nwjzqq590.execute-api.us-east-1.amazonaws.com/dev/mutant' -H 'Content-Type: application/json' -d '{
+    "dna": ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
+}'
+```
+
+#### GET to /stats
+```bash
+curl -X GET 'https://3nwjzqq590.execute-api.us-east-1.amazonaws.com/dev/stats'
+```
+
+## Project URL
+- [Meli challenge URL](https://3nwjzqq590.execute-api.us-east-1.amazonaws.com/dev/)
+
 ## Author
 - Github: [@msuez](https://github.com/msuez)
 - Github: [@matisuez](https://github.com/matisuez)

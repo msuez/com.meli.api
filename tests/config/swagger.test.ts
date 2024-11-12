@@ -42,16 +42,12 @@ describe('Swagger config', () => {
                         email: 'matisuez@gmail.com',
                     },
                 },
-                components: {
-                    schemas: expect.any(Object),
-                },
             },
-            apis: ['**/*.ts'],
         };
         
         expect(swaggerJSDoc).toHaveBeenCalledWith(expect.objectContaining({
             swaggerDefinition: expectedOptions.swaggerDefinition,
-            apis: ["**/*.ts"],
+            apis: ["src/routes/*.ts"],
         }));
     });
 
@@ -65,3 +61,4 @@ describe('Swagger config', () => {
         expect(swaggerUi.setup).toHaveBeenCalledWith(swaggerSpec);
     });
 });
+

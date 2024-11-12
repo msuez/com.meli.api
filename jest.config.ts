@@ -12,11 +12,10 @@ const config: Config = {
   testEnvironment: "jest-environment-node",
   verbose: true,
   testMatch: ["<rootDir>/tests/**/*.test.ts"],
-  collectCoverageFrom: [
-    "src/**/*.ts",
-    "!src/**/*.d.ts",
-    "!src/**/index.ts",
-    "src/errors/**/*.ts"
+  watchPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/.cache/',
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',

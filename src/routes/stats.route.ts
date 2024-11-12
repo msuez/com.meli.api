@@ -29,7 +29,25 @@ export class StatsRoutes {
          *         content:
          *           application/json:
          *             schema:
-         *               $ref: '#/components/schemas/StatsResponse'
+         *               type: object
+         *               properties:
+         *                 count_mutant_dna:
+         *                   type: integer
+         *                   description: Total number of mutant DNA sequences
+         *                   example: 40
+         *                 count_human_dna:
+         *                   type: integer
+         *                   description: Total number of human DNA sequences
+         *                   example: 100
+         *                 ratio:
+         *                   type: number
+         *                   format: float
+         *                   description: Ratio of mutant to human DNA sequences
+         *                   example: 0.4
+         *               required:
+         *                 - count_mutant_dna
+         *                 - count_human_dna
+         *                 - ratio
          */
         router.get('/', statsController.getDnaRatio);
 
