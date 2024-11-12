@@ -23,7 +23,7 @@ export class Swagger {
                 },
             },
             apis: [
-                'src/routes/*.ts',
+                '**/*.ts',
             ],
         };
         return swaggerUi.setup(swaggerJSDoc(swaggerOptions));

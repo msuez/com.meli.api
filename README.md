@@ -1,5 +1,12 @@
-# com.meli.api
+
+# MELI Mutants API
 Challenge for Mercado Libre 2024 (mutants)
+
+## System Requirements
+- Node.js v20.x or higher.
+- Docker & compose (for local execution).
+- Serverless v4.4.7
+- AWS CLI: Account setup for serverless deployment.
 
 ## Run Locally with Docker (Recommended)
 
@@ -27,6 +34,14 @@ Start the server
   docker-compose up --build
 ```
 
+## Run build
+
+To build the project, run the following command
+
+```bash
+  npm run build
+```
+
 ## Running Tests (>80)
 
 To run tests, run the following command
@@ -37,6 +52,14 @@ To run tests, run the following command
 or 
 ```bash
   npm run test:watch
+```
+
+## Run Deploy
+
+To deploy the project, run the following command
+
+```bash
+  npm run deploy
 ```
 
 ## Curls to AWS Lambda
@@ -55,6 +78,19 @@ curl -X GET 'https://3nwjzqq590.execute-api.us-east-1.amazonaws.com/dev/stats'
 
 ## Project URL
 - [Meli challenge URL](https://3nwjzqq590.execute-api.us-east-1.amazonaws.com/dev/)
+
+## Tech Stack
+- Node.js
+- Express
+- MongoDB
+- Swagger
+- Jest
+- Supertest
+- Mongoose
+- Serverless
+- Mongo Atlas
+- AWS Lambda
+- TypeScript
 
 ## Author
 - Github: [@msuez](https://github.com/msuez)

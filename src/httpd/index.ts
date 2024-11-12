@@ -35,7 +35,11 @@ export class Server {
     }
 
     private create() {
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: '*',
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+        }));
         this.app.use(express.json());
         this.app.use(express.urlencoded({
             extended: true,
