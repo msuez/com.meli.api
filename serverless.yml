@@ -9,13 +9,9 @@ functions:
   meliChallenge:
     handler: dist/app.handler
     events:
-      - http:
-          path: /{proxy+}
-          method: any
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
+      - httpApi:
+          path: '/{proxy+}'
+          method: ANY
 
 build:
   esbuild:
