@@ -47,7 +47,7 @@ describe('Swagger config', () => {
         
         expect(swaggerJSDoc).toHaveBeenCalledWith(expect.objectContaining({
             swaggerDefinition: expectedOptions.swaggerDefinition,
-            apis: ['**/*.ts', './routes/**/*.js',],
+            apis: ['**/*.ts', './dist/routes/**/*.js',],
         }));
     });
 
