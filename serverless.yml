@@ -30,5 +30,6 @@ build:
       - swagger-ui-express
 
 package:
-  individually: true
-  excludeDevDependencies: true
+  patterns:
+    - '!node_modules/**'
+    - 'dist/**'
